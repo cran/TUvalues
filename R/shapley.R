@@ -23,7 +23,7 @@
 #'  } else {
 #'    return(0)
 #'  }
-#'
+#' }
 #' shapley(v, method = "appro", n_rep = 4000, n_players = n)
 #'
 #' @examples

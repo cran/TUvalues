@@ -27,6 +27,16 @@ The Shapley value for each player.
 Calculate the Shapley value
 }
 \examples{
+n <- 10
+v <- function(coalition) {
+if (length(coalition) > n/2) {
+   return(1)
+ } else {
+   return(0)
+ }
+}
+shapley(v, method = "appro", n_rep = 4000, n_players = n)
+
 n <- 3
 v <- c(1,1,2,1,2,2,2)
 shapley(v, method = "exact")

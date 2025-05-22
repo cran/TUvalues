@@ -35,7 +35,7 @@ The Banzhaf value for each player
 Calculate the Banzhaf value
 }
 \examples{
-n <- 10
+n <- 8
 v <- function(coalition) {
 if (length(coalition) > n/2) {
    return(1)
@@ -44,10 +44,10 @@ if (length(coalition) > n/2) {
  }
 }
 banzhaf(v, method = "exact", n_players = n)
-banzhaf(v, method = "appro", n_rep = 4000, n_players = n, replace = TRUE)
+banzhaf(v, method = "appro", n_rep = 2000, n_players = n, replace = TRUE)
 
 v<-c(0,0,0,1,2,1,3)
 banzhaf(v, method = "exact")
-banzhaf(v, method = "appro", n_rep = 4000, replace = TRUE)
+banzhaf(v, method = "appro", n_rep = 2000, replace = TRUE)
 
 }
