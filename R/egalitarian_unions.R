@@ -1,14 +1,16 @@
-#' @title Equal Surplus Division value
+#' @title Egalitarian value with a priori unions
 #'
 #' @description
-#' Calculate the equal surplus division value
+#' Calculate the egalitarian value in games with a priori unions
 #'
 #' @param characteristic_func The valued function defined on the subsets of the number
 #' of players
+#' @param union List of vectors indicating the a priori unions between the
+#' players.
 #' @param n_players Only used if \code{characteristic_func} is a \code{function}.
 #' The number of players in the game.
 #'
-#' @return The equal surplus division value for each player
+#' @return The egalitarian value for each player
 #'
 #' @examples
 #' n <- 10
@@ -19,29 +21,33 @@
 #'     return(0)
 #'   }
 #' }
-#' equal_surplus_division(v,n)
+#' union <- list(1:4,5:n)
+#' egalitarian_unions(v,union,n)
 #'
 #' @examples
 #' v <- c(1,1,2,1,2,2,2)
-#' equal_surplus_division(v)
+#' union <- list(c(1,2),c(3))
+#' egalitarian_unions(v, union)
 #'
 #' @export
 
-equal_surplus_division <- function(characteristic_func, n_players = 0) {
+egalitarian_unions <- function(characteristic_func, union, n_players = 0) {
 
+  egalitarian_value <- rep(0, n_players)
   if (is.vector(characteristic_func)) {
 
     # get number of players
     n_players<-log(length(characteristic_func),2)
-    if (n_players!=round(n_players)){
+    if (n_players!=round(n_players)) {
       characteristic_func <- c(0, characteristic_func)
       n_players<-log(length(characteristic_func),2)
     }
 
-    characteristic_func <- characteristic_func[-1]
-    individual_sum <- sum(characteristic_func[seq(n_players)])
+    num_unions <- length(union)
     v_grand <- characteristic_func[length(characteristic_func)]
-    esd_value <- characteristic_func[seq(n_players)] + (v_grand - individual_sum)/n_players
+    for (block in union) {
+      egalitarian_value[block] <- v_grand / (length(block) * num_unions)
+    }
 
   } else if (is.function(characteristic_func)) {
 
@@ -50,18 +56,17 @@ equal_surplus_division <- function(characteristic_func, n_players = 0) {
              than 1.")
     }
 
-    esd_value <- rep(0, n_players)
-    individual_sum <- sum(sapply(seq(n_players), characteristic_func))
+    num_unions <- length(union)
     v_grand <- characteristic_func(seq(n_players))
-    for(i in seq(n_players)) {
-      esd_value[i] <- characteristic_func(i) + (v_grand - individual_sum)/n_players
+    for (block in union) {
+      egalitarian_value[block] <- v_grand / (length(block) * num_unions)
     }
 
   } else {
     stop("Invalid characteristic_func provided.")
   }
 
-  names(esd_value) <- seq(n_players)
-  return(esd_value)
+  names(egalitarian_value) <- seq(n_players)
+  return(egalitarian_value)
 
 }

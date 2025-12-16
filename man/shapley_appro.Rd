@@ -4,7 +4,7 @@
 \alias{shapley_appro}
 \title{Shapley value (approximation)}
 \usage{
-shapley_appro(characteristic_func, n_players, n_rep)
+shapley_appro(characteristic_func, n_players, n_rep, echo)
 }
 \arguments{
 \item{characteristic_func}{The valued function defined on the subsets of the number
@@ -14,10 +14,18 @@ of players}
 
 \item{n_rep}{The number of iterations to perform in the approximated
 calculation}
+
+\item{echo}{Show progress of the calculation.}
 }
 \value{
 The Shapley value for each player
 }
 \description{
-Calculate the approximated Shapley value based on sampling
+Calculate the approximated Shapley value based on sampling using
+the algorithm proposed by Castro et al. (2009).
+}
+\references{
+Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation
+of the Shapley value based on sampling. Computers & operations research,
+36(5), 1726-1730.
 }

@@ -6,15 +6,19 @@
 \usage{
 banzhaf(
   characteristic_func,
+  n_players = 0,
   method = "exact",
   n_rep = 10000,
-  n_players = 0,
-  replace = FALSE
+  replace = FALSE,
+  echo = TRUE
 )
 }
 \arguments{
 \item{characteristic_func}{The valued function defined on the subsets of the
 number of players.}
+
+\item{n_players}{Only used if \code{characteristic_func} is a \code{function}.
+The number of players in the game.}
 
 \item{method}{Method used to calculate the Banzhaf value. Valid methods are:
 \code{exact} for the exact calculation or \code{appro} for approximated
@@ -23,10 +27,10 @@ polynomial calculation based on sampling.}
 \item{n_rep}{Only used if \code{method} is \code{appro}. The number of
 iterations to perform in the approximated calculation}
 
-\item{n_players}{Only used if \code{characteristic_func} is a \code{function}.
-The number of players in the game.}
+\item{replace}{Should sampling be with replacement?}
 
-\item{replace}{should sampling be with replacement?}
+\item{echo}{Only used if \code{method} is \code{appro}. Show progress of the
+approximated calculation.}
 }
 \value{
 The Banzhaf value for each player

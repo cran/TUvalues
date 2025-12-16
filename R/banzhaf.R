@@ -5,14 +5,16 @@
 #'
 #' @param characteristic_func The valued function defined on the subsets of the
 #' number of players.
+#' @param n_players Only used if \code{characteristic_func} is a \code{function}.
+#' The number of players in the game.
 #' @param method Method used to calculate the Banzhaf value. Valid methods are:
 #' \code{exact} for the exact calculation or \code{appro} for approximated
 #' polynomial calculation based on sampling.
 #' @param n_rep Only used if \code{method} is \code{appro}. The number of
 #' iterations to perform in the approximated calculation
-#' @param n_players Only used if \code{characteristic_func} is a \code{function}.
-#' The number of players in the game.
-#' @param replace should sampling be with replacement?
+#' @param replace Should sampling be with replacement?
+#' @param echo Only used if \code{method} is \code{appro}. Show progress of the
+#' approximated calculation.
 #'
 #' @return The Banzhaf value for each player
 #'
@@ -36,8 +38,8 @@
 #' @export
 
 
-banzhaf <- function(characteristic_func, method = "exact", n_rep = 10000, n_players = 0,
-                    replace = FALSE){
+banzhaf <- function(characteristic_func, n_players = 0, method = "exact", n_rep = 10000,
+                    replace = FALSE, echo = TRUE){
 
   if (! method %in% c("exact", "appro")) {
     stop("Invalid methos specified\n Use \"exact\" for the exact value or \"appro\" for the approximation.")
@@ -54,11 +56,11 @@ banzhaf <- function(characteristic_func, method = "exact", n_rep = 10000, n_play
     return(banzhaf_exact(characteristic_func, n_players))
   } else {
     if (n_rep < 1) {
-      stop("Invalid number of iterations specified. m must be greater than 0.")
+      stop("Invalid number of iterations specified. n_rep must be greater than 0.")
     } else if (is.function(characteristic_func) && n_players < 2) {
       stop("Invalid number of players specified. n_players must be greater than 1.")
     }
-    return(banzhaf_appro(characteristic_func, n_players, n_rep, replace))
+    return(banzhaf_appro(characteristic_func, n_players, n_rep, replace, echo))
   }
 
 }

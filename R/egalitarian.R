@@ -21,6 +21,10 @@
 #' }
 #' egalitarian(v,n)
 #'
+#' @examples
+#' v <- c(1,1,2,1,2,2,2)
+#' egalitarian(v)
+#'
 #' @export
 
 egalitarian <- function(characteristic_func, n_players = 0) {
@@ -31,10 +35,10 @@ egalitarian <- function(characteristic_func, n_players = 0) {
     n_players<-log(length(characteristic_func),2)
     if (n_players!=round(n_players)) {
       characteristic_func <- c(0, characteristic_func)
-      n_players<-log(length(characteristic_func+1),2)
+      n_players<-log(length(characteristic_func),2)
     }
 
-    egalitarian_value <- characteristic_func[n_players]/n_players
+    egalitarian_value <- characteristic_func[length(characteristic_func)]/n_players
 
   } else if (is.function(characteristic_func)) {
 
@@ -43,14 +47,14 @@ egalitarian <- function(characteristic_func, n_players = 0) {
              than 1.")
     }
 
-    egalitarian_value <- characteristic_func(1:n_players)/n_players
+    egalitarian_value <- characteristic_func(seq(n_players))/n_players
 
   } else {
     stop("Invalid characteristic_func provided.")
   }
 
   egalitarian_value <- rep(egalitarian_value, n_players)
-  names(egalitarian_value) <- 1:n_players
+  names(egalitarian_value) <- seq(n_players)
   return(egalitarian_value)
 
 }

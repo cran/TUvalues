@@ -1,6 +1,7 @@
 #' @title Banzhaf-Owen Value
 #'
-#' @description Calculate the approximated Banzhaf-Owen value
+#' @description Calculate the approximated Banzhaf-Owen value using the
+#' algorithm proposed by Saavedra-Nieves & Fiestras-Janeiro (2021).
 #'
 #' @param characteristic_func The valued function defined on the subsets of the number
 #' of players
@@ -9,11 +10,16 @@
 #' @param n_rep Only used if \code{method} is \code{appro}. The number of
 #' iterations to perform in the approximated calculation.
 #' @param n_players The number of players
-#' @param replace should sampling be with replacement?
+#' @param replace Should sampling be with replacement?
+#' @param echo Show progress of the calculation.
 #'
 #' @return The Banzhaf-Owen Index for each player
+#'
+#' @references Saavedra-Nieves, A., & Fiestras-Janeiro, M. G. (2021). Sampling
+#' methods to estimate the Banzhaf–Owen value. Annals of Operations Research,
+#' 301(1), 199-223.
 
-banzhaf_owen_appro <- function(characteristic_func, union, n_players, n_rep, replace) {
+banzhaf_owen_appro <- function(characteristic_func, union, n_players, n_rep, replace, echo) {
 
   if (is.vector(characteristic_func)) {
     # get number of players
@@ -30,7 +36,9 @@ banzhaf_owen_appro <- function(characteristic_func, union, n_players, n_rep, rep
   if (!replace) {
     n_rep <- min(n_rep, length(union)-1)
   }
-  pb <- txtProgressBar(min = 0, max = n_rep*n_players, style = 3)
+  if (echo) {
+    pb <- txtProgressBar(min = 0, max = n_rep*n_players, style = 3)
+  }
 
   banzhaf_owen_value <- rep(0, n_players)
   for (i in 1:n_players) {
@@ -41,7 +49,9 @@ banzhaf_owen_appro <- function(characteristic_func, union, n_players, n_rep, rep
     for (rep in 1:n_rep) {
 
       # Update the progress bar
-      setTxtProgressBar(pb, ((i-1)*n_rep)+rep)
+      if (echo) {
+        setTxtProgressBar(pb, ((i-1)*n_rep)+rep)
+      }
 
       # S in all(S) with probability 1/2**n WITHOUT repetition
       if (!replace) {
@@ -76,7 +86,9 @@ banzhaf_owen_appro <- function(characteristic_func, union, n_players, n_rep, rep
 
     }
   }
-  close(pb)
+  if (echo) {
+    close(pb)
+  }
   banzhaf_owen_value <- banzhaf_owen_value/n_rep
   names(banzhaf_owen_value) <- 1:n_players
   return(banzhaf_owen_value)
