@@ -1,5 +1,5 @@
-506e59fd3a6a744c4c8949e1dc518216 *DESCRIPTION
-32b3df891003658e06acd59c5fec1aa0 *NAMESPACE
+48d7a66747f2cb68d71414fa4db67f70 *DESCRIPTION
+3e7baec21d399a5d67ce2df87c70d34b *NAMESPACE
 6ee4cad0c506bf28ed632d6124f1d752 *R/banzhaf.R
 91cae396da19eb336d2339e6105d5ab8 *R/banzhaf_appro.R
 790df3ff7c1f8c7632ab6c7051490de4 *R/banzhaf_exact.R
@@ -9,8 +9,8 @@ bea78e13112320bdaafceac929fcc77c *R/banzhaf_owen_appro.R
 c43e59b7817be9a14960e05b86ac124b *R/centroid.R
 4a3ed393f78c6e48d6a0e8930f30044d *R/coalitions.R
 3a99540957019ff99eaacef56a70df23 *R/coreVertex.R
-23fd14a5803cc19302bdd959b3b045c4 *R/core_appro.R
-1bf61a4e693deec197aa6b2cd63d50b3 *R/core_exact.R
+4c52e0fa7759af2b1a859fff3cbba58a *R/core_appro.R
+f0bdb0a641594133e7a6be9489c230cc *R/core_exact.R
 ab4842adc6cfb4e22e052b6dd3974f28 *R/egalitarian.R
 774ac6f59852fd47c97426a631bf61d2 *R/egalitarian_unions.R
 a4027db9ebeee8f92f297593ba30b161 *R/equal_surplus_division.R
@@ -33,7 +33,7 @@ e73ac5007653faee3c6abf55e17e63cb *man/banzhaf_owen_exact.Rd
 4aeae94dc9a3de0f1d9fcbb74a20646b *man/centroid.Rd
 e924b71b339a17ad2e596ce5ae3b185f *man/coalitions.Rd
 53b98614a0bca81344c52eb334495534 *man/coreVertex.Rd
-ac5318085d9f95256160156ec3adb7b1 *man/core_appro.Rd
+fd40ac2cb11d7d7335355df6953aa252 *man/core_appro.Rd
 391cc33413d444520f901f9dc5299b10 *man/core_exact.Rd
 a6f4a2491ece39da13d0d8a153aa7682 *man/egalitarian.Rd
 331f48fa5e435b79d62d63319ae01869 *man/egalitarian_unions.Rd
